@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lab Metrics Dashboard</title>
+	<link rel="stylesheet" href="/styles.css?v=4">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="layout">
+		<aside class="sidebar">
+			<div class="sidebar-header">
+				<h1><i class="fas fa-microchip"></i> Lab Monitor</h1>
+				<div class="system-status-indicator" id="systemStatusIndicator">
+					<div class="status-dot"></div>
+					<span class="status-text">Loading...</span>
+				</div>
+			</div>
+			<div class="sidebar-content">
+				<h2>Labs</h2>
+				<ul id="labList" class="lab-list"></ul>
+			</div>
+			<div class="sidebar-footer">
+				<div class="last-updated">
+					<i class="fas fa-clock"></i>
+					<span id="lastUpdated">Last updated: --</span>
+				</div>
+			</div>
+		</aside>
+		<div class="content">
+			<header class="topbar">
+				<div class="topbar-left">
+					<h1>
+						<!-- inline brand logo that adapts to theme color -->
+						<svg class="brand-logo" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" opacity="0.12"></rect>
+							<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"></rect>
+							<rect x="9" y="9" width="2" height="2" fill="#fff" opacity="0.2"></rect>
+						</svg>
+						<span class="brand-text"><i class="fas fa-tachometer-alt" aria-hidden="true"></i> System Dashboard</span>
+					</h1>
+				</div>
+				<div class="topbar-right">
+					<button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+						<i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
+						<!-- decorative inline SVG added to button (won't affect theme logic) -->
+						<svg class="theme-decor" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.06"></circle>
+							<path d="M12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor" opacity="0.9"></path>
+						</svg>
+						<span class="visually-hidden">Toggle theme</span>
+					</button>
+				</div>
+			</header>
+			
+			<!-- System Summary Bar -->
+			<div class="summary-bar">
+				<div class="summary-item">
+					<div class="summary-icon cpu-icon">
+						<i class="fas fa-microchip"></i>
+					</div>
+					<div class="summary-content">
+						<div class="summary-label">CPU</div>
+						<div class="summary-value" id="summaryCpu">--%</div>
+					</div>
+				</div>
+				<div class="summary-item">
+					<div class="summary-icon memory-icon">
+						<i class="fas fa-memory"></i>
+					</div>
+					<div class="summary-content">
+						<div class="summary-label">Memory</div>
+						<div class="summary-value" id="summaryMemory">--%</div>
+					</div>
+				</div>
+				<div class="summary-item">
+					<div class="summary-icon disk-icon">
+						<i class="fas fa-hdd"></i>
+					</div>
+					<div class="summary-content">
+						<div class="summary-label">Disk</div>
+						<div class="summary-value" id="summaryDisk">--%</div>
+					</div>
+				</div>
+				<div class="summary-item">
+					<div class="summary-icon network-icon">
+						<i class="fas fa-network-wired"></i>
+					</div>
+					<div class="summary-content">
+						<div class="summary-label">Network</div>
+						<div class="summary-value" id="summaryNetwork">--%</div>
+					</div>
+				</div>
+				<div class="summary-item">
+					<div class="summary-icon uptime-icon">
+						<i class="fas fa-clock"></i>
+					</div>
+					<div class="summary-content">
+						<div class="summary-label">Uptime</div>
+						<div class="summary-value" id="summaryUptime">--</div>
+					</div>
+				</div>
+			</div>
+
+			<main>
+				<section class="card welcome-card">
+					<div class="welcome-content">
+						<div class="welcome-icon">
+							<i class="fas fa-rocket"></i>
+						</div>
+						<div class="welcome-text">
+							<h2>Welcome to Lab Monitor</h2>
+							<p>Choose a lab from the sidebar to view detailed system metrics and performance data.</p>
+						</div>
+					</div>
+				</section>
+				
+				<!-- System Status Card -->
+				<section class="card status-card">
+					<div class="status-header">
+						<h3><i class="fas fa-heartbeat"></i> System Status</h3>
+						<div class="health-indicator" id="systemHealthIndicator">
+							<div class="health-dot"></div>
+							<span class="health-text">Checking...</span>
+						</div>
+					</div>
+					<div class="status-content">
+						<div class="status-metrics">
+							<div class="metric-item">
+								<span class="metric-label">CPU Peak:</span>
+								<span class="metric-value" id="cpuPeak">--%</span>
+							</div>
+							<div class="metric-item">
+								<span class="metric-label">Memory Peak:</span>
+								<span class="metric-value" id="memoryPeak">--%</span>
+							</div>
+							<div class="metric-item">
+								<span class="metric-label">Active PCs:</span>
+								<span class="metric-value" id="activePcs">--</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+	</div>
+	<script src="/app.js?v=4"></script>
+</body>
+</html>
+
+
