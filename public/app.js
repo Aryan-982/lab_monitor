@@ -197,9 +197,10 @@ async function loadLabsList() {
 			}
 		} catch (error) {
 			console.error('Error fetching lab health:', error);
+			healthStatus = 'unknown'; // Set to unknown on error
 		}
-		
-		const healthIcon = healthStatus === 'healthy' ? '🟢' : healthStatus === 'warning' ? '🟡' : '🔴';
+
+		const healthIcon = healthStatus === 'healthy' ? '🟢' : healthStatus === 'warning' ? '🟡' : healthStatus === 'unknown' ? '⚪' : '🔴';
 		
 		li.innerHTML = `<a class="lab-link" href="#">
 			<div class="lab-icon">${l.slice(0,2).toUpperCase()}</div>

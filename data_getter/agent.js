@@ -8,7 +8,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 // 1) MONGO_URI (full connection string)
 // 2) MONGO_USER, MONGO_PASS, MONGO_HOST (builds mongodb+srv://USER:PASS@HOST/?appName=...)
 const { MONGO_URI, MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_APPNAME } = process.env;
-let uri = MONGO_URI;
+let uri = MONGO_URI
 if (!uri && MONGO_USER && MONGO_PASS && MONGO_HOST) {
         const appName = MONGO_APPNAME || 'Cluster0';
         uri = `mongodb+srv://${encodeURIComponent(MONGO_USER)}:${encodeURIComponent(MONGO_PASS)}@${MONGO_HOST}/?appName=${appName}`;
